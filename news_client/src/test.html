@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="../node_modules/kindeditor/kindeditor-all.js"></script>
+    <script type="text/javascript" src="../node_modules/kindeditor/lang/zh-CN.js"></script>
+</head>
+
+<body>
+    <textarea id="editor_id" name="content" style="width:700px;height:300px;">  
+    这里输入内容...  
+</textarea>
+    <script>
+        KindEditor.ready(function (K) {
+            window.editor = K.create('#editor_id');
+        });
+    </script>
+</body>
+
+</html>

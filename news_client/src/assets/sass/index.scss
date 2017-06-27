@@ -1,2 +1,61 @@
 @import 'base.scss';
-@import 'login.scss';
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+header {
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    background-color: #fff;
+    box-shadow: 2px 2px #ccc;
+    padding-left: 20px;
+}
+
+main {
+    width: 100%; // height: 100%;
+    flex: 1;
+    display: flex;
+    .left {
+        width: 200px;
+        height: 100%;
+        ul {
+            height: 100%;
+            background-color: #fff;
+            li:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    .right {
+        flex: 1;
+        height: 100%;
+        .panel {
+            height: 100%;
+            .panel-body {
+                height: 100%; // background-color: #fff;
+                #modifyPwd {
+                    border-radius: 25px;
+                    width: 40%;
+                    padding: 30px;
+                    background-color: #fff;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -70%)
+                }
+                .addnewContainer {
+                    width: 100%;
+                    height: 100%;
+                    padding: 20px 200px;
+                }
+            }
+        }
+    }
+}
