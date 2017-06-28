@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css" />
+</head>
+
+<body>
+    <header>
+        <ul class="nav nav-pills">
+            <li role="presentation" class="active"><a href="#">新闻列表</a></li>
+            <li role="presentation"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">Messages</a></li>
+        </ul>
+    </header>
+    <main>
+        <div class="panel panel-default">
+            <div class="panel-heading">新闻列表</div>
+            <div class="panel-body" id="newsList">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="newsBtn">
+                    <li role="presentation" class="active"><a href="#ranking" aria-controls="ranking" role="tab" data-toggle="tab" category="资讯新闻">资讯新闻</a></li>
+                    <li role="presentation"><a href="#financial" aria-controls="financial" role="tab" data-toggle="tab" category="财经新闻">财经新闻</a></li>
+                    <li role="presentation"><a href="#entertainment" aria-controls="entertainment" role="tab" data-toggle="tab" category="娱乐新闻">娱乐新闻</a></li>
+                    <li role="presentation"><a href="#sports" aria-controls="sports" role="tab" data-toggle="tab" category="体育新闻">体育新闻</a></li>
+                    <li role="presentation"><a href="#house" aria-controls="house" role="tab" data-toggle="tab" category="房产新闻">房产新闻</a></li>
+                    <li role="presentation"><a href="#tech" aria-controls="tech" role="tab" data-toggle="tab" category="科技新闻">科技新闻</a></li>
+                    <li role="presentation"><a href="#game" aria-controls="game" role="tab" data-toggle="tab" category="游戏新闻">游戏新闻</a></li>
+                    <li role="presentation"><a href="#military" aria-controls="military" role="tab" data-toggle="tab" category="军事新闻">军事新闻</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="ranking" category="资讯新闻">
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="financial" category="财经新闻"></div>
+                    <div role="tabpanel" class="tab-pane fade" id="entertainment" category="娱乐新闻"></div>
+                    <div role="tabpanel" class="tab-pane fade" id="sports" category="体育新闻"></div>
+                    <div role="tabpanel" class="tab-pane fade" id="house" category="房产新闻"></div>
+                    <div role="tabpanel" class="tab-pane fade" id="tech" category="科技新闻"></div>
+                    <div role="tabpanel" class="tab-pane fade" id="game" category="游戏新闻"></div>
+                    <div role="tabpanel" class="tab-pane fade" id="military" category="军事新闻"></div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </main>
+</body>
+
+</html>
+<script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../src/assets/js/template.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/html" id="newsutemTemplate">
+    <ul>
+        {{each}}
+        <li>
+            <div class="pic">
+                <img src="{{$value.imgArr[0]}}" alt="">
+            </div>
+            <h4>{{$value.title}}</h4>
+            <p>{{$value.describes}}</p>
+            <div class="bottom clearfix">
+                <button type="button" class="btn btn-primary pull-left">查看详情</button>
+                <span class="pull-right">{{$value.date}}</span>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</script>
