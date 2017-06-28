@@ -12,7 +12,30 @@
 
 <body>
     <header>
-        hello world!
+        <div class="header-left col-md-6">
+
+        </div>
+        <!--<div class="header-right">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
+                <li role="separator" class="divider">wenben</li>
+                <li role="separator" class="divider">wenben</li>
+                <li role="separator" class="divider">wenben</li>
+            </ul>
+        </div>-->
+        <div class="dropdown col-md-offset-11">
+            <button class="btn btn-default dropdown-toggle glyphicon glyphicon-user" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="true">
+                         &nbsp个人中心
+                 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu " aria-labelledby="dropdownMenu1">
+                <li><a href="#" class="glyphicon glyphicon-user">&nbspProfile</a></li>
+                <li><a href="#" class="glyphicon glyphicon-envelope">&nbspInbox</a></li>
+                <li><a href="#" class="glyphicon glyphicon-asterisk">&nbspSetting</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" class="glyphicon glyphicon-off" id="logout">&nbspLogout</a></li>
+            </ul>
+        </div>
     </header>
     <main>
         <div class="left">
@@ -41,9 +64,10 @@
 <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="../node_modules/jquery.cookie/jquery.cookie.js"></script>
 <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="assets/js/template.js"></script>
 <script charset="utf-8" src="../node_modules/kindeditor/kindeditor-all.js"></script>
 <script charset="utf-8" src="../node_modules/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript" src="main.js"></script>
 <script type="text/html" id="modifyPwdTemplate">
     <form class="form-horizontal">
         <div class="form-group">
@@ -85,13 +109,13 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">描述</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="describes" placeholder="请输入标题">
+                    <input type="text" class="form-control" name="describes" placeholder="请输入描述信息">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">请选择新闻类别</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
+                    <select class="form-control" name="categorys">
                         <option value="资讯新闻">资讯新闻</option>
                         <option value="财经新闻">财经新闻</option>
                         <option value="娱乐新闻">娱乐新闻</option>
@@ -109,6 +133,7 @@
                     <textarea id="editor_id" name="content" style="width:100%;height:300px;">  
                         这里输入内容...
                     </textarea>
+                    <input type="text" name="imgArr" style="display:none">
                 </div>
             </div>
 
@@ -129,21 +154,98 @@
             </div>
             <button type="button" class="btn btn-primary">搜索</button>
         </div>
-        <div id="newsList">
-            <ul class="list-group">
+        <div>
+            <ul class="list-group " id="newsList">
+                {{each datas}}
                 <li class="list-group-item clearfix">
                     <div class="listLeft pull-left">
-                        <h4>标题</h4>
-                        <p>描述</p>
+                        <h4>{{$value.title}}</h4>
+                        <p>{{$value.describes}}</p>
                     </div>
-                    <div class="listRight pull-right">
-                        <button type="button" class="btn btn-default">修改</button>
-                        <button type="button" class="btn btn-default">删除</button>
+                    <div class="listRight pull-right" timestamp={{$value.date}}>
+                        <button type="button" class="btn btn-default modifyNewsBtn">修改</button>
+                        <button type="button" class="btn btn-default delNewsBtn">删除</button>
                     </div>
-
                 </li>
+                {{/each}}
             </ul>
         </div>
-
     </form>
+</script>
+
+<script type="text/html" id="newsChangePagesTemplate">
+    {{each datas}}
+    <li class="list-group-item clearfix">
+        <div class="listLeft pull-left">
+            <h4>{{$value.title}}</h4>
+            <p>{{$value.describes}}</p>
+        </div>
+        <div class="listRight pull-right" timestamp={{$value.date}}>
+            <button type="button" class="btn btn-default modifyNewsBtn">修改</button>
+            <button type="button" class="btn btn-default delNewsBtn">删除</button>
+        </div>
+    </li>
+    {{/each}}
+    </form>
+</script>
+
+<script type="text/html" id="modifyTemplate">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modifyModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">修改新闻</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="title" placeholder="请输入标题" value="{{title}}">
+                                <input type="text" class="form-control" name="uname" style="display:none" value="{{uname}}">
+                                <input type="text" class="form-control" name="timestamp" style="display:none" value="{{date}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="describes" placeholder="请输入描述信息" value="{{describes}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">请选择新闻类别</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="categorys">
+                                    <option value="资讯新闻">资讯新闻</option>
+                                    <option value="财经新闻">财经新闻</option>
+                                    <option value="娱乐新闻">娱乐新闻</option>
+                                    <option value="体育新闻">体育新闻</option>
+                                    <option value="房产新闻">房产新闻</option>
+                                    <option value="科技新闻">科技新闻</option>
+                                    <option value="游戏新闻">游戏新闻</option>
+                                    <option value="军事新闻">军事新闻</option>
+                               </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">输入新闻主体</label>
+                            <div class="col-sm-10">
+                                <textarea id="editor_id" name="content" style="width:100%;height:300px;">  
+                                      {{content}}
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-8 col-sm-10">
+                                <button type="button" class="btn btn-primary" id="cancleInput">取消</button>
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </script>

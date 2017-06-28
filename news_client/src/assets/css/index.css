@@ -73,3 +73,25 @@ main {
           width: 100%;
           height: 100%;
           padding: 20px 200px; }
+        main .right .panel .panel-body p {
+          color: #ccc;
+          margin-top: 5px; }
+        main .right .panel .panel-body h4 {
+          margin-top: 10px; }
+        main .right .panel .panel-body .listRight {
+          margin-top: 17px; }
+        main .right .panel .panel-body #newsPages {
+          margin: 20px auto; }
+          main .right .panel .panel-body #newsPages li {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 30px;
+            float: left;
+            color: sienna; }
+          main .right .panel .panel-body #newsPages li:hover {
+            cursor: pointer;
+            background-color: #ccc; }
+          main .right .panel .panel-body #newsPages li.current {
+            background-color: #ccc; }

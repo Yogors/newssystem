@@ -55,6 +55,35 @@ main {
                     height: 100%;
                     padding: 20px 200px;
                 }
+                p {
+                    color: #ccc;
+                    margin-top: 5px;
+                }
+                h4 {
+                    margin-top: 10px;
+                }
+                .listRight {
+                    margin-top: 17px;
+                }
+                #newsPages {
+                    margin: 20px auto;
+                    li {
+                        width: 30px;
+                        height: 30px;
+                        border: 1px solid #ccc;
+                        text-align: center;
+                        line-height: 30px;
+                        float: left;
+                        color: sienna;
+                    }
+                    li:hover {
+                        cursor: pointer;
+                        background-color: #ccc;
+                    }
+                    li.current {
+                        background-color: #ccc;
+                    }
+                }
             }
         }
     }
